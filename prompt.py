@@ -8,4 +8,4 @@ pipe = transformers.pipeline(task="text-generation", model=model, tokenizer=toke
 while True:
     prompt = input(f"\nConverse with LLaMA2 {name}: ")
     result = pipe(f"<s>[INST] {prompt} [/INST]")[0]['generated_text']
-    print(result[result.index('[/INST]') + 7:])
+    print(result[len(prompt):])

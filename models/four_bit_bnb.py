@@ -18,10 +18,10 @@ def get_model_and_tokenizer():
         model, 
         quantization_config=bnb_config,
         device_map={"": 0},
-        low_cpu_mem_usage=True
     )
 
     model.config.use_cache = False
     model.config.pretraining_tp = 1
+    model.eval()
 
     return model, tokenizer
