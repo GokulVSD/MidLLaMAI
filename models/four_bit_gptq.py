@@ -5,11 +5,32 @@ import json
 import os
 import torch
 
+
 def get_model_and_tokenizer():
+    """
+    To save quantization time, we use a model that has already been quantized
+    using the same approach as the function `train_model_and_tokenizer`.
+    """
+    
+    model = "TheBloke/Llama-2-7B-chat-GPTQ"
+
+    tokenizer = LlamaTokenizer.from_pretrained(model)
+
+    model = transformers.AutoModelForCausalLM.from_pretrained(
+        model, 
+        device_map={"": 0},
+    )
+
+    model.eval()
+
+    return model, tokenizer    
+
+
+def train_model_and_tokenizer():
     quantizer = GPTQQuantizer(bits=4, dataset="wikitext2", model_seqlen=4096)
     quantizer.quant_method = "gptq"
 
-    model = "meta-llama/Llama-2-7b-chat-hf"
+    model = "meta-llama/Llama-2-13b-chat-hf"
     tokenizer = LlamaTokenizer.from_pretrained(model)
 
     model = transformers.AutoModelForCausalLM.from_pretrained(

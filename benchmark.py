@@ -14,11 +14,11 @@ def run_benchmark():
         ch = int(input("Choice: "))
 
         if ch == 1:
-            print(f'{name} LLaMA2 perplexity using WikiText2: {perplexity.get_wikitext2_perplexity(model, tokenizer)['mean_perplexity']}')
+            print(f'{name} LLaMA2 perplexity using WikiText2: ' + str(perplexity.get_wikitext2_perplexity(model, tokenizer)['mean_perplexity']))
         elif ch == 2:
-            print(lm_eval_harness.do_lm_eval_task(model, tokenizer, 'mmlu'))
+            print(lm_eval_harness.do_lm_eval_task(model, tokenizer, 'mmlu', limit=20))
         elif ch == 3:
-            print(lm_eval_harness.do_lm_eval_task(model, tokenizer, 'bbh', limit=3))
+            print(lm_eval_harness.do_lm_eval_task(model, tokenizer, 'bbh', limit=5))
         else:
             print("Invalid choice, try again.")
 
