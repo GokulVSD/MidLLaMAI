@@ -2,15 +2,25 @@ from transformers import AutoTokenizer
 import transformers
 
 """
+GPTQ is a post-training quantization technique where each row of the weight matrix 
+is quantized independently to find a version of the weights that minimizes the error. 
+These weights  are quantized to int4, but they're restored to fp16 on the fly during 
+inference. This can save your memory-usage by 4x because the int4 weights are 
+dequantized in a fused kernel rather than a GPU's global memory, and you can also 
+expect a speedup in inference  because using a lower bitwidth takes less time to 
+communicate.
+"""
+
+"""
 On Disk Usage: 6.8GB
-GPU VRAM Usage (Baseline after running Perplexity on WikiText2):
+GPU VRAM Usage (Baseline after batch size 1 Perplexity on WikiText2):
 Perplexity (WikiText2):
-MMLU:
-MMLU Time taken:
+MMLU (limit=):
+MMLU Time taken (batch size 1 on above limit):
 BBH (limit=):
 
-Not so good accuracy, upfront quantization required, but super low
-space required on disk, faster inference.
+?? accuracy, upfront quantization required, but low
+space required on disk, fast inference.
 """
 
 

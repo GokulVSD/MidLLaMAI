@@ -3,11 +3,19 @@ import transformers
 from torch import float16
 
 """
+bitsandbytes is the easiest option for quantizing a model to 4-bit. 
+4-bit quantization multiplies outliers in fp16 with non-outliers in int4, 
+converts the non-outlier values back to fp16, and then adds them together 
+to return the weights in fp16. This reduces the degradative effect outlier 
+values have on a model's performance.
+"""
+
+"""
 On Disk Usage: 13GB
-GPU VRAM Usage (Baseline after running Perplexity on WikiText2):
+GPU VRAM Usage (Baseline after batch size 1 Perplexity on WikiText2):
 Perplexity (WikiText2):
-MMLU:
-MMLU Time taken:
+MMLU (limit=):
+MMLU Time taken (batch size 1 on above limit):
 BBH (limit=):
 
 Good accuracy, no upfront quantization required, large on-disk space

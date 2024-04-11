@@ -1,4 +1,4 @@
-from transformers import LlamaTokenizer
+from transformers import AutoTokenizer
 import transformers
 import json
 import os
@@ -11,7 +11,9 @@ def train_model_and_tokenizer():
     quantizer.quant_method = "gptq"
 
     model = "meta-llama/Llama-2-13b-chat-hf"
-    tokenizer = LlamaTokenizer.from_pretrained(model)
+    quant = ".weights/4b-13B-gptq"
+
+    tokenizer = AutoTokenizer.from_pretrained(model)
 
     model = transformers.AutoModelForCausalLM.from_pretrained(
         model, 
@@ -20,9 +22,9 @@ def train_model_and_tokenizer():
     )
     
     quantized_model = quantizer.quantize_model(model, tokenizer)
-    quantized_model.save_pretrained(".weights/4b-13B-gptq", safe_serialization=True)
-    tokenizer.save_pretrained(".weights/4b-13B-gptq")
+    quantized_model.save_pretrained(quant, safe_serialization=True)
+    tokenizer.save_pretrained(quant)
 
-    with open(os.path.join(".weights/4b-13B-gptq", "quantize_config.json"), "w", encoding="utf-8") as f:
+    with open(os.path.join(quant, "quantize_config.json"), "w", encoding="utf-8") as f:
         quantizer.disable_exllama = False
         json.dump(quantizer.to_dict(), f, indent=2)
