@@ -31,10 +31,10 @@ class Perplexity(evaluate.Metric):
         )
 
     def _compute(
-        self, predictions, batch_size: int = 16, add_start_token: bool = True,  max_length=None
+        self, predictions, batch_size: int = 1, add_start_token: bool = True,  max_length=None
     ):
         # special token to also be the padding token
-        if self.tokenizer.pad_token is None and batch_size > 1:
+        if self.tokenizer.pad_token is None and batch_size > 0:
             existing_special_tokens = list(self.tokenizer.special_tokens_map_extended.values())
             # check that the model already has at least one special token defined
             assert (

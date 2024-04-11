@@ -1,5 +1,10 @@
 from utils import select_model_tokenizer_name
 from metrics import perplexity, lm_eval_harness
+import time
+
+MMLU_LIMIT_RATIO = 0.05
+BBH_LIMIT_RATIO = 0.05
+
 
 def run_benchmark():
 
@@ -13,14 +18,21 @@ def run_benchmark():
 
         ch = int(input("Choice: "))
 
+        begin = time.time()
+
         if ch == 1:
-            print(f'{name} LLaMA2 perplexity using WikiText2: ' + str(perplexity.get_wikitext2_perplexity(model, tokenizer)['mean_perplexity']))
+            print(f'{name} Perplexity using WikiText2: ' + str(perplexity.get_wikitext2_perplexity(model, tokenizer)['mean_perplexity']))
         elif ch == 2:
-            print(lm_eval_harness.do_lm_eval_task(model, tokenizer, 'mmlu', limit=20))
+            print(f'{name} MMLU Score:')
+            print(lm_eval_harness.do_lm_eval_task(model, tokenizer, 'mmlu', limit=MMLU_LIMIT_RATIO))
         elif ch == 3:
-            print(lm_eval_harness.do_lm_eval_task(model, tokenizer, 'bbh', limit=5))
+            print(f'{name} BBH Score:')
+            print(lm_eval_harness.do_lm_eval_task(model, tokenizer, 'bbh', limit=BBH_LIMIT_RATIO))
         else:
             print("Invalid choice, try again.")
+        
+        end = time.time()
+        print("Took time: " + str(end - begin) + " seconds")
 
 if __name__ == "__main__":
     run_benchmark()

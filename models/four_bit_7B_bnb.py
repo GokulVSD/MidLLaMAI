@@ -1,11 +1,23 @@
-from transformers import LlamaTokenizer
+from transformers import AutoTokenizer
 import transformers
 from torch import float16
+
+"""
+On Disk Usage: 13GB
+GPU VRAM Usage (Baseline after running Perplexity on WikiText2):
+Perplexity (WikiText2):
+MMLU:
+MMLU Time taken:
+BBH (limit=):
+
+Good accuracy, no upfront quantization required, large on-disk space
+requirement, slow inference.
+"""
 
 def get_model_and_tokenizer():
     model = "meta-llama/Llama-2-7b-chat-hf"
 
-    tokenizer = LlamaTokenizer.from_pretrained(model)
+    tokenizer = AutoTokenizer.from_pretrained(model)
 
     bnb_config = transformers.BitsAndBytesConfig(
         load_in_4bit=True,
@@ -17,7 +29,7 @@ def get_model_and_tokenizer():
     model = transformers.AutoModelForCausalLM.from_pretrained(
         model, 
         quantization_config=bnb_config,
-        device_map={"": 0},
+        device_map="auto",
     )
 
     model.config.use_cache = False
