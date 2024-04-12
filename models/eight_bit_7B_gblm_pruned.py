@@ -1,4 +1,4 @@
-from transformers import AutoTokenizer
+from transformers import LlamaTokenizer
 import transformers
 
 """
@@ -15,13 +15,10 @@ We combine this pruning technique with 8 bit quantization.
 On Disk Usage: 13GB
 GPU VRAM Usage (Baseline after batch size 1 Perplexity on WikiText2):
 Perplexity (WikiText2) (limit=):
-Perplexity Time taken (batch size 1 on above limit):
 MMLU (limit=):
 MMLU Time taken (batch size 1 on above limit):
 BBH (limit=):
 BBH Time taken (batch size 1 on above limit):
-
-?? accuracy, upfront pruning required, no reduction in disk usage.
 """
 
 
@@ -32,7 +29,7 @@ def get_model_and_tokenizer():
     
     model = "MBZUAI-LLM/GBLM-Pruner-LLaMA-2-7B-chat"
 
-    tokenizer = AutoTokenizer.from_pretrained(model)
+    tokenizer = LlamaTokenizer.from_pretrained(model)
 
     bnb_config = transformers.BitsAndBytesConfig(
         load_in_8bit=True,

@@ -1,4 +1,4 @@
-from transformers import AutoTokenizer
+from transformers import LlamaTokenizer
 import transformers
 
 """
@@ -15,14 +15,10 @@ communicate.
 On Disk Usage: 6.8GB
 GPU VRAM Usage (Baseline after batch size 1 Perplexity on WikiText2):
 Perplexity (WikiText2) (limit=):
-Perplexity Time taken (batch size 1 on above limit):
 MMLU (limit=):
 MMLU Time taken (batch size 1 on above limit):
 BBH (limit=):
 BBH Time taken (batch size 1 on above limit):
-
-?? accuracy, upfront quantization required, but low
-space required on disk, fast inference.
 """
 
 
@@ -34,7 +30,7 @@ def get_model_and_tokenizer():
     
     model = "TheBloke/Llama-2-13B-chat-GPTQ"
 
-    tokenizer = AutoTokenizer.from_pretrained(model)
+    tokenizer = LlamaTokenizer.from_pretrained(model)
 
     model = transformers.AutoModelForCausalLM.from_pretrained(
         model, 

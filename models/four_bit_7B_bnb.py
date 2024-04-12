@@ -1,4 +1,4 @@
-from transformers import AutoTokenizer
+from transformers import LlamaTokenizer
 import transformers
 from torch import float16
 
@@ -12,22 +12,18 @@ values have on a model's performance.
 
 """
 On Disk Usage: 13GB
-GPU VRAM Usage (Baseline after batch size 1 Perplexity on WikiText2):
-Perplexity (WikiText2) (limit=):
-Perplexity Time taken (batch size 1 on above limit):
+GPU VRAM Usage (Baseline after batch size 1 Perplexity on WikiText2): 4530MB
+Perplexity (WikiText2) (limit=): 97.15
 MMLU (limit=):
 MMLU Time taken (batch size 1 on above limit):
 BBH (limit=):
 BBH Time taken (batch size 1 on above limit):
-
-Good accuracy, no upfront quantization required, large on-disk space
-requirement, slow inference.
 """
 
 def get_model_and_tokenizer():
     model = "meta-llama/Llama-2-7b-chat-hf"
 
-    tokenizer = AutoTokenizer.from_pretrained(model)
+    tokenizer = LlamaTokenizer.from_pretrained(model)
 
     bnb_config = transformers.BitsAndBytesConfig(
         load_in_4bit=True,

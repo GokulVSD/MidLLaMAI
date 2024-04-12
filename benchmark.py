@@ -2,9 +2,9 @@ from utils import select_model_tokenizer_name
 from metrics import perplexity, lm_eval_harness
 import time
 
-PERPLEXITY_LIMIT = 50
-MMLU_LIMIT_RATIO = 0.05
-BBH_LIMIT_RATIO = 0.05
+PERPLEXITY_LIMIT = None
+MMLU_LIMIT_RATIO = 0.5
+BBH_LIMIT_RATIO = 0.5
 
 
 def run_benchmark():
@@ -22,7 +22,7 @@ def run_benchmark():
         begin = time.time()
 
         if ch == 1:
-            print(f'{name} Perplexity using WikiText2: ' + str(perplexity.get_wikitext2_perplexity(model, tokenizer, limit=PERPLEXITY_LIMIT)['mean_perplexity']))
+            print(f'{name} Perplexity using WikiText2: ', perplexity.get_wikitext2_perplexity(model, tokenizer, limit=PERPLEXITY_LIMIT))
         elif ch == 2:
             print(f'{name} MMLU Score:')
             print(lm_eval_harness.do_lm_eval_task(model, tokenizer, 'mmlu', limit=MMLU_LIMIT_RATIO))
