@@ -107,8 +107,8 @@ class Perplexity(evaluate.Metric):
         return {"perplexities": ppls, "mean_perplexity": np.mean(ppls)}
     
 
-def get_wikitext2_perplexity(model, tokenizer):
+def get_wikitext2_perplexity(model, tokenizer, limit):
     perplexity = Perplexity(model, tokenizer)
-    input_texts = datasets.load_dataset("wikitext", "wikitext-2-raw-v1", split="test")["text"][:10]
+    input_texts = datasets.load_dataset("wikitext", "wikitext-2-raw-v1", split="test")["text"][:limit]
     input_texts = [s for s in input_texts if s!='']
     return perplexity._compute(input_texts)

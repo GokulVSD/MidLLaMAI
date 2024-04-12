@@ -1,13 +1,14 @@
 from transformers import AutoTokenizer
 import transformers
-from torch import float16
 
 """
-bitsandbytes is the easiest option for quantizing a model to 4-bit. 
-4-bit quantization multiplies outliers in fp16 with non-outliers in int4, 
-converts the non-outlier values back to fp16, and then adds them together 
-to return the weights in fp16. This reduces the degradative effect outlier 
-values have on a model's performance.
+Gradient-based Language Model Pruner (GBLM-Pruner) is a sparsity-centric pruning 
+method for pretrained LLMs. GBLM-Pruner leverages the first-order term of the 
+Taylor expansion, operating in a training-free manner by harnessing properly 
+normalized gradients from a few calibration samples to determine the pruning 
+metric.
+
+We combine this pruning technique with 8 bit quantization.
 """
 
 """
@@ -20,26 +21,27 @@ MMLU Time taken (batch size 1 on above limit):
 BBH (limit=):
 BBH Time taken (batch size 1 on above limit):
 
-Good accuracy, no upfront quantization required, large on-disk space
-requirement, slow inference.
+?? accuracy, upfront pruning required, no reduction in disk usage.
 """
 
+
 def get_model_and_tokenizer():
-    model = "meta-llama/Llama-2-7b-chat-hf"
+    """
+    Pruned using https://github.com/VILA-Lab/GBLM-Pruner
+    """
+    
+    model = "MBZUAI-LLM/GBLM-Pruner-LLaMA-2-7B-chat"
 
     tokenizer = AutoTokenizer.from_pretrained(model)
 
     bnb_config = transformers.BitsAndBytesConfig(
-        load_in_4bit=True,
-        bnb_4bit_quant_type='nf4',
-        bnb_4bit_use_double_quant=False,
-        bnb_4bit_compute_dtype=float16
+        load_in_8bit=True,
     )
 
     model = transformers.AutoModelForCausalLM.from_pretrained(
         model, 
-        quantization_config=bnb_config,
         device_map={"": 0},
+        quantization_config=bnb_config,
     )
 
     model.config.use_cache = False
