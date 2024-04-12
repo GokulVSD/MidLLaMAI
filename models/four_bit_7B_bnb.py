@@ -12,9 +12,9 @@ values have on a model's performance.
 
 """
 On Disk Usage: 13GB
-GPU VRAM Usage (Baseline after batch size 1 Perplexity on WikiText2): 4530MB
-Perplexity (WikiText2) (limit=): 97.15
-Perplexity Time taken (batch size 1 on above limit):
+GPU VRAM Usage (Baseline after batch size 1 Perplexity on WikiText2): 4856MB
+Perplexity (WikiText2) (limit=None): 94.23
+Perplexity Time taken (batch size 1 on above limit): 1100s
 MMLU (limit=):
 MMLU Time taken (batch size 1 on above limit):
 BBH (limit=):

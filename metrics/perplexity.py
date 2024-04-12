@@ -104,7 +104,7 @@ class Perplexity(evaluate.Metric):
 
             ppls += perplexity_batch.tolist()
 
-        return {"perplexities": ppls, "mean_perplexity": np.mean(ppls)}
+        return {"mean_perplexity": np.nanmean(ppls)}
     
 
 def get_wikitext2_perplexity(model, tokenizer, limit):

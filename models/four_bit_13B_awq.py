@@ -10,9 +10,9 @@ can run models in 4-bit precision without experiencing any performance degradati
 
 """
 On Disk Usage: 6.8GB
-GPU VRAM Usage (Baseline after batch size 1 Perplexity on WikiText2):
-Perplexity (WikiText2) (limit=):
-Perplexity Time taken (batch size 1 on above limit):
+GPU VRAM Usage (Baseline after batch size 1 Perplexity on WikiText2): 7772MB
+Perplexity (WikiText2) (limit=None): 61.01
+Perplexity Time taken (batch size 1 on above limit): 2790.1s
 MMLU (limit=):
 MMLU Time taken (batch size 1 on above limit):
 BBH (limit=):
