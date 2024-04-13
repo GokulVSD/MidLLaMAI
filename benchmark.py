@@ -3,8 +3,8 @@ from metrics import perplexity, lm_eval_harness
 import time
 
 PERPLEXITY_LIMIT = None
-MMLU_LIMIT_RATIO = 0.5
-BBH_LIMIT_RATIO = 0.5
+MMLU_LIMIT_RATIO = 50
+BBH_LIMIT_RATIO = 50
 
 
 def run_benchmark():

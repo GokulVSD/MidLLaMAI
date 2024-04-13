@@ -16,8 +16,8 @@ On Disk Usage: 3.7GB
 GPU VRAM Usage (Baseline after batch size 1 Perplexity on WikiText2): 4786MB
 Perplexity (WikiText2) (limit=None): 118.11
 Perplexity Time taken (batch size 1 on above limit): 892.5s
-MMLU (limit=):
-MMLU Time taken (batch size 1 on above limit):
+MMLU (limit=50): 0.4439
+MMLU Time taken (batch size 1 on above limit): 480.33s
 BBH (limit=):
 BBH Time taken (batch size 1 on above limit):
 """
