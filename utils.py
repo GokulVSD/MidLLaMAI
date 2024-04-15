@@ -1,26 +1,19 @@
-from models import four_bit_7B_bnb, four_bit_7B_gptq, four_bit_13B_gptq, four_bit_13B_awq, eight_bit_7B_gblm_pruned
+from models import four_bit_7B_bnb, four_bit_7B_gptq, four_bit_13B_gptq, four_bit_13B_awq, eight_bit_7B_gblm_pruned, baseline_7B
 
-def select_model_tokenizer_name():
-    while True:
-        print("Select a model:")
-        print("1. 4-bit 7B BitsAndBytes quantized LLaMA2.")
-        print("2. 4-bit 7B GPTQ quantized LLaMA2.")
-        print("3. 4-bit 13B GPTQ quantized LLaMA2.")
-        print("4. 4-bit 13B AWQ quantized LLaMA2.")
-        print("5. 8-bit 7B GBLM Pruned LLaMA2.")
-
-        ch = int(input("Choice: "))
-        if ch == 1:
-            return *four_bit_7B_bnb.get_model_and_tokenizer(), "4-bit 7B BitsAndBytes"
-        elif ch == 2:
-            return *four_bit_7B_gptq.get_model_and_tokenizer(), '4-bit 7B GPTQ'
-        elif ch == 3:
-            return *four_bit_13B_gptq.get_model_and_tokenizer(), '4-bit 13B GPTQ'
-        elif ch == 4:
-            return *four_bit_13B_awq.get_model_and_tokenizer(), '4-bit 13B AWQ'
-        elif ch == 5:
-            return *eight_bit_7B_gblm_pruned.get_model_and_tokenizer(), '8-bit 7B GBLM Pruned'
-        else:
-            print("Invalid choice, try again.")
+def select_model_tokenizer_name(model_name):
+    if model_name == "bnb":
+        return *four_bit_7B_bnb.get_model_and_tokenizer(), "4-bit 7B BitsAndBytes"
+    elif model_name == "gptq-7b":
+        return *four_bit_7B_gptq.get_model_and_tokenizer(), '4-bit 7B GPTQ'
+    elif model_name == "gptq-13b":
+        return *four_bit_13B_gptq.get_model_and_tokenizer(), '4-bit 13B GPTQ'
+    elif model_name == "awq":
+        return *four_bit_13B_awq.get_model_and_tokenizer(), '4-bit 13B AWQ'
+    elif model_name == "gblm":
+        return *eight_bit_7B_gblm_pruned.get_model_and_tokenizer(), '8-bit 7B GBLM Pruned'
+    elif model_name == "baseline":
+        return *baseline_7B.get_model_and_tokenizer(), '7B Baseline'
+    else:
+        print("Invalid choice.")
 
     

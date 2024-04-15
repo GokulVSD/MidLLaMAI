@@ -17,8 +17,8 @@ Perplexity (WikiText2) (limit=None): 94.23
 Perplexity Time taken (batch size 1 on above limit): 1100s
 MMLU (limit=50): 0.4646
 MMLU Time taken (batch size 1 on above limit): 552.9
-BBH (limit=):
-BBH Time taken (batch size 1 on above limit):
+BBH (limit=10): 0.3629
+BBH Time taken (batch size 1 on above limit): 1891.69s
 """
 
 def get_model_and_tokenizer():
