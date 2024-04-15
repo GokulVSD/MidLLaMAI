@@ -18,8 +18,8 @@ Perplexity (WikiText2) (limit=None): 86.077
 Perplexity Time taken (batch size 1 on above limit): 1687.87s
 MMLU (limit=50): 0.5221
 MMLU Time taken (batch size 1 on above limit): 868.85s
-BBH (limit=):
-BBH Time taken (batch size 1 on above limit):
+BBH (limit=10): 0.4481
+BBH Time taken (batch size 1 on above limit): 14919.49s
 """
 
 
